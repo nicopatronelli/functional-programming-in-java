@@ -18,11 +18,11 @@ public class Pokemon {
 	private final String evolution; // could be another Pokemon
 
 	public static WithNumber builder() {
-		return number
-				-> name
+		return (number)
+				-> (name
 				-> type
 				-> evolution
-				-> new Pokemon(number, name, type, evolution);
+				-> new Pokemon(number, name, type, evolution));
 	}
 
 	@FunctionalInterface
