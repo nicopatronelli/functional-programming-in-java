@@ -1,7 +1,5 @@
 package lambdas;
 
-import lambdas.util.Condicion;
-import lambdas.util.Mapper;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
