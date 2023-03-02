@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static util.Printer.print;
@@ -176,5 +177,27 @@ public class LambdasTests {
             }
         }
         return resultado;
+    }
+
+    //  Refactor con lambdas
+    private static List<Integer> dobleDeParesConLambdas(List<Integer> nums) {
+        return nums.stream()
+                .filter(num -> num % 2 == 0)
+                .map(num -> num * 2)
+                .collect(toList());
+    }
+
+    private static List<Integer> imparesMenosTresConLambdas(List<Integer> nums) {
+        return nums.stream()
+            .filter(num -> num % 2 != 0)
+            .map(num -> num - 3)
+            .collect(toList());
+    }
+
+    private static List<String> pokemonsConLambdas(List<String> pokemonNames) {
+        return pokemonNames.stream()
+                .filter(name -> name.endsWith("chu"))
+                .map(name -> name.toUpperCase())
+                .collect(toList());
     }
 }
