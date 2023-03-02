@@ -1,9 +1,14 @@
-package lambdas;
+package lambdas.resuelto;
 
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
+import lambdas.Condition;
+import lambdas.Mapper;
 
 import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -119,7 +124,7 @@ public class LambdasTests {
 
 //  2da iteración: Nuestra primera abstracción ya no nos alcanza.
 //  Creamos una nueva abstracción parametrizando "bloques" mediante clases anónimas (Java 7 o inferior)
-    private static List<Integer> filtrarYMapear(List<Integer> nums, Condicion<Integer> condicion, Mapper<Integer, Integer> mapper) {
+    private static List<Integer> filtrarYMapear(List<Integer> nums, Condition<Integer> condicion, Mapper<Integer, Integer> mapper) {
         List<Integer> resultado = new ArrayList<>();
         for (int i = 0; i < nums.size(); i++) {
             Integer num = nums.get(i);
@@ -147,7 +152,7 @@ public class LambdasTests {
     void testPokeNames() {
 //        List<String> pokes = pokeNames(List.of("pikachu", "charmander", "squartle", "raichu", "snorlax"));
         List<String> pokes = filtrarYMapear2(List.of("pikachu", "charmander", "squartle", "raichu", "snorlax"),
-                new Condicion<String>() {
+                new Condition<String>() {
                     @Override
                     public boolean test(String name) {
                         return name.endsWith("chu");
@@ -168,7 +173,7 @@ public class LambdasTests {
 //  4ta iteración:
 //  Usamos generics para parametrizar los tipos de las interfaces y poder generalizar
 //  nuestra solución
-    private static <T> List<T> filtrarYMapear2(List<T> nums, Condicion<T> condition, Mapper<T,T>mapper) {
+    private static <T> List<T> filtrarYMapear2(List<T> nums, Condition<T> condition, Mapper<T,T>mapper) {
         List<T> resultado = new ArrayList<>();
         for (int i = 0; i < nums.size(); i++) {
             T objetoActual = nums.get(i);
@@ -180,24 +185,22 @@ public class LambdasTests {
     }
 
     //  Refactor con lambdas
-    private static List<Integer> dobleDeParesConLambdas(List<Integer> nums) {
-        return nums.stream()
-                .filter(num -> num % 2 == 0)
-                .map(num -> num * 2)
-                .collect(toList());
+    public static List<Integer> dobleDeParesConLambdas(List<Integer> nums) {
+        return filterAndMap(nums, num -> num % 2 == 0, num -> num * 2);
     }
 
-    private static List<Integer> imparesMenosTresConLambdas(List<Integer> nums) {
-        return nums.stream()
-            .filter(num -> num % 2 != 0)
-            .map(num -> num - 3)
-            .collect(toList());
+    public static List<Integer> imparesMenosTresConLambdas(List<Integer> nums) {
+        return filterAndMap(nums, num -> num % 2 != 0, num -> num - 3);
     }
 
-    private static List<String> pokemonsConLambdas(List<String> pokemonNames) {
-        return pokemonNames.stream()
-                .filter(name -> name.endsWith("chu"))
-                .map(name -> name.toUpperCase())
+    public static List<String> pokemonsConLambdas(List<String> pokemonNames) {
+        return filterAndMap(pokemonNames, name -> name.endsWith("chu"), name -> name.toUpperCase());
+    }
+
+    private static <T> List<T> filterAndMap(List<T> list, Predicate<T> cond, Function<T, T> func) {
+        return list.stream()
+                .filter(elem -> cond.test(elem))
+                .map(elem -> func.apply(elem))
                 .collect(toList());
     }
 }

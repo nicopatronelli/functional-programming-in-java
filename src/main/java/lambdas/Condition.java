@@ -1,5 +1,5 @@
 package lambdas;
 
-public interface Condicion<T> {
+public interface Condition<T> {
     boolean test(T num);
 }
