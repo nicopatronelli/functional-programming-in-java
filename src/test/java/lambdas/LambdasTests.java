@@ -103,9 +103,22 @@ public class LambdasTests {
         assertTrue(nums.contains(6));
     }
 
+//    List<Integer> nums = aRenombrar(List.of(2, 3, 5, 6, 8, 9, 12),
+//            new Condicion() {
+//                @Override
+//                public boolean test(int num) {
+//                    return num % 2 != 0;
+//                }
+//            }, new Mapper() {
+//                @Override
+//                public int apply(int num) {
+//                    return num - 3;
+//                }
+//            });
+
 //  2da iteración: Nuestra primera abstracción ya no nos alcanza.
 //  Creamos un nuevo método estático parametrizando los dos bloques de código utilizados
-    private static List<Integer> aRenombrar(List<Integer> nums, Condicion condicion, Mapper mapper) {
+    private static List<Integer> filtrarYMapear(List<Integer> nums, Condicion condicion, Mapper mapper) {
         List<Integer> resultado = new ArrayList<>();
         for (int i = 0; i < nums.size(); i++) {
             Integer num = nums.get(i);
