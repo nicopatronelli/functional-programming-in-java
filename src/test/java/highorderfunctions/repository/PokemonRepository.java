@@ -1,7 +1,7 @@
 package highorderfunctions.repository;
 
-import domain.Pokemon;
-import domain.PokemonType;
+import domain.pokemon.Pokemon;
+import domain.pokemon.PokemonType;
 
 public class PokemonRepository {
 	public static final Pokemon pikachu = buildPikachu();

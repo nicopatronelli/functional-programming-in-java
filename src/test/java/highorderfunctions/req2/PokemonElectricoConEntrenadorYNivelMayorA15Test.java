@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import domain.Pokemon;
+import domain.pokemon.Pokemon;
 
 import static highorderfunctions.repository.PokemonRepository.charmander;
 import static highorderfunctions.repository.PokemonRepository.charmeleon;

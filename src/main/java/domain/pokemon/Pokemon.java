@@ -1,4 +1,4 @@
-package domain;
+package domain.pokemon;
 
 public class Pokemon {
 	private int number;
