@@ -65,11 +65,6 @@ public class LambdasTests {
         assertTrue(nums.contains(36));
     }
 
-
-
-
-
-
 //  1era iteración: Buscamos eliminar el código repetido a través de una primera abstracción
     private static List<Integer> paresMultiplicadosPor(List<Integer> nums, int factor) {
         List<Integer> resultado = new ArrayList<>();
@@ -110,11 +105,8 @@ public class LambdasTests {
         assertTrue(nums.contains(6));
     }
 
-
-
-
 //  2da iteración: Nuestra segunda abstracción tampoco nos alcanza ahora.
-//  Modificamos ligeramente nuestra segunda abstracción parametrizando los tipos mediante generics
+//  Creamos un nuevo método estático parametrizando los dos bloques de código utilizados
     private static List<Integer> aRenombrar(List<Integer> nums, Condicion condicion, Mapper mapper) {
         List<Integer> resultado = new ArrayList<>();
         for (int i = 0; i < nums.size(); i++) {
