@@ -6,6 +6,7 @@ import domain.warrior.weapon.type.weapon.Shield;
 import domain.warrior.weapon.type.weapon.Sword;
 import domain.warrior.Weapon;
 import domain.warrior.weapon.type.WeaponType;
+import io.vavr.control.Try;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
