@@ -1,7 +1,7 @@
-package optional;
+package lambdas;
 
-import optional.util.Condicion;
-import optional.util.Mapper;
+import lambdas.util.Condicion;
+import lambdas.util.Mapper;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
