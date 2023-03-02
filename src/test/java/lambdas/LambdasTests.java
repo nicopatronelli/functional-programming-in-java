@@ -117,13 +117,62 @@ public class LambdasTests {
 //            });
 
 //  2da iteración: Nuestra primera abstracción ya no nos alcanza.
-//  Creamos un nuevo método estático parametrizando los dos bloques de código utilizados
-    private static List<Integer> filtrarYMapear(List<Integer> nums, Condicion condicion, Mapper mapper) {
+//  Creamos una nueva abstracción parametrizando "bloques" mediante clases anónimas (Java 7 o inferior)
+    private static List<Integer> filtrarYMapear(List<Integer> nums, Condicion<Integer> condicion, Mapper<Integer, Integer> mapper) {
         List<Integer> resultado = new ArrayList<>();
         for (int i = 0; i < nums.size(); i++) {
             Integer num = nums.get(i);
             if (condicion.test(num)) {
                 resultado.add(mapper.apply(num));
+            }
+        }
+        return resultado;
+    }
+
+//  REQ 4) Dada una lista con nombres de pokemons (strings), obtener una lista en mayúsculas de aquellos
+//  que terminan con "chu".
+    private static List<String> pokeNames(List<String> pokemonNames) {
+        List<String> endsWithChu = new ArrayList<>();
+        for (int i = 0; i < pokemonNames.size(); i++) {
+            String currentName = pokemonNames.get(i);
+            if (currentName.endsWith("chu")) {
+                endsWithChu.add(currentName.toUpperCase());
+            }
+        }
+        return endsWithChu;
+    }
+
+    @Test
+    void testPokeNames() {
+//        List<String> pokes = pokeNames(List.of("pikachu", "charmander", "squartle", "raichu", "snorlax"));
+        List<String> pokes = filtrarYMapear2(List.of("pikachu", "charmander", "squartle", "raichu", "snorlax"),
+                new Condicion<String>() {
+                    @Override
+                    public boolean test(String name) {
+                        return name.endsWith("chu");
+                    }
+                },
+                new Mapper<String, String>() {
+                    @Override
+                    public String apply(String name) {
+                        return name.toUpperCase();
+                    }
+                });
+
+        assertEquals(2, pokes.size());
+        assertTrue(pokes.contains("PIKACHU"));
+        assertTrue(pokes.contains("RAICHU"));
+    }
+
+//  4ta iteración:
+//  Usamos generics para parametrizar los tipos de las interfaces y poder generalizar
+//  nuestra solución
+    private static <T> List<T> filtrarYMapear2(List<T> nums, Condicion<T> condition, Mapper<T,T>mapper) {
+        List<T> resultado = new ArrayList<>();
+        for (int i = 0; i < nums.size(); i++) {
+            T objetoActual = nums.get(i);
+            if (condition.test(objetoActual)) {
+                resultado.add(mapper.apply(objetoActual));
             }
         }
         return resultado;

@@ -1,5 +1,5 @@
 package lambdas;
 
-public interface Mapper {
-    int apply(int num);
+public interface Mapper<T,U> {
+    U apply(T T);
 }
