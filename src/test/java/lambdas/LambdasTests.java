@@ -103,14 +103,14 @@ public class LambdasTests {
         assertTrue(nums.contains(6));
     }
 
-//  2da iteración: Nuestra segunda abstracción tampoco nos alcanza ahora.
+//  2da iteración: Nuestra primera abstracción ya no nos alcanza.
 //  Creamos un nuevo método estático parametrizando los dos bloques de código utilizados
     private static List<Integer> aRenombrar(List<Integer> nums, Condicion condicion, Mapper mapper) {
         List<Integer> resultado = new ArrayList<>();
         for (int i = 0; i < nums.size(); i++) {
             Integer num = nums.get(i);
             if (condicion.test(num)) {
-                resultado.add(mapper.aplicar(num));
+                resultado.add(mapper.apply(num));
             }
         }
         return resultado;
